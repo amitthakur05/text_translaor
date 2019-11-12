@@ -9,6 +9,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +23,7 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOption
 public class MainActivity extends AppCompatActivity {
     Button btn;
     EditText e;
+    TextView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,37 +31,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btn = findViewById(R.id.button);
         e=findViewById(R.id.editText);
-    // final String text=e.getText().toString();
-       //final int request_for_image=0;
-        // Create an English-German translator:
+        view=findViewById(R.id.textView);
 
-
+        //language download
         FirebaseTranslatorOptions options =
                 new FirebaseTranslatorOptions.Builder()
                         .setSourceLanguage(FirebaseTranslateLanguage.EN)
-                        .setTargetLanguage(FirebaseTranslateLanguage.DE)
+                        .setTargetLanguage(FirebaseTranslateLanguage.HI)
                         .build();
-        final FirebaseTranslator englishGermanTranslator =
+        final FirebaseTranslator englishHindiTranslator =
                 FirebaseNaturalLanguage.getInstance().getTranslator(options);
 
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
-                .requireWifi()
                 .build();
-        englishGermanTranslator.downloadModelIfNeeded(conditions)
+        englishHindiTranslator.downloadModelIfNeeded(conditions)
                 .addOnSuccessListener(
                         new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void v) {
-                                // Model downloaded successfully. Okay to start translating.
-                                // (Set a flag, unhide the translation UI, etc.)
+
                             }
                         })
                 .addOnFailureListener(
                         new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                // Model couldn’t be downloaded or other internal error.
-                                // ...
+
                             }
                         });
 
@@ -66,12 +64,12 @@ btn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String text=e.getText().toString();
-        englishGermanTranslator.translate(text)
+        englishHindiTranslator.translate(text)
                 .addOnSuccessListener(
                         new OnSuccessListener<String>() {
                             @Override
                             public void onSuccess(@NonNull String translatedText) {
-                                e.setText(translatedText);
+                                view.setText(translatedText);
                             }
                         })
                 .addOnFailureListener(
