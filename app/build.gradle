@@ -49,5 +49,17 @@ dependencies {
 }
 
 dependencies {
+    // ...
+
+    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0'
+    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7'
+}
+
+dependencies {
     implementation 'com.google.firebase:firebase-ml-vision:24.0.1'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
 }

@@ -12,20 +12,38 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
 public class Main2Activity extends AppCompatActivity {
 ImageView imageView;
+Button fetch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Intent i = getIntent();
         imageView=findViewById(R.id.imageView);
+        fetch=findViewById(R.id.button2);
         Intent cam = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cam,123);
+            fetch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(Main2Activity.this,"changing activity",Toast.LENGTH_SHORT).show();
+                    //to add extra text
+                    /*
+                    String message="hello my name is amit";
+                    Intent first=new Intent(Main2Activity.this,MainActivity.class);
+                    first.putExtra("abc",message);
+                    startActivity(first);
+
+                     */
+                }
+            });
 
 
 
