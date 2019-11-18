@@ -20,8 +20,6 @@ import com.google.firebase.ml.naturallanguage.languageid.FirebaseLanguageIdentif
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
         //language configuration
 
-
+        Intent in=getIntent();
+        String result=in.getStringExtra("message");
+        enter_text.setText(result);
         //translating language
         translate.setOnClickListener(new View.OnClickListener() {
             @Override
