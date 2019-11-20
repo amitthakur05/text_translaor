@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    Button translate,add_image;
+    Button translate,scan_text;
     EditText enter_text;
     TextView view_for_tanslatedtext;
     String lan="";
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         translate = findViewById(R.id.button);
         enter_text = findViewById(R.id.editText);
         view_for_tanslatedtext = findViewById(R.id.textView);
-        add_image = findViewById(R.id.button2);
+        scan_text = findViewById(R.id.button2);
        // fetch = findViewById(R.id.button3);
         String text = enter_text.getText().toString();
 
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 // accessing text from an image
-        add_image.setOnClickListener(new View.OnClickListener() {
+        scan_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Main2Activity.class);
