@@ -23,42 +23,67 @@
         <EditText
             android:id="@+id/editText"
             android:layout_width="360dp"
-            android:layout_height="207dp"
+            android:layout_height="153dp"
             android:ems="10"
             android:gravity="start"
             android:inputType="textPersonName"
             android:textColor="#181616" />
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="79dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_height="110dp">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="translate" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Scan text"
-                android:textColorLink="#009B9797" />
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="translate" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:layout_weight="1"
-                android:text="speak" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="129dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Scan text"
+                    android:textColorLink="#009B9797" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="138dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text="speak" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="pronounce" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
 
         <TextView
             android:id="@+id/textView"
@@ -66,6 +91,7 @@
             android:layout_height="311dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
