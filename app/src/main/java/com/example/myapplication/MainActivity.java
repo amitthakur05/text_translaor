@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,15 +23,18 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguag
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    Button translate,scan_text;
+    Button translate,scan_text,speak;
     EditText enter_text;
     TextView view_for_tanslatedtext;
     String lan="";
     FirebaseTranslator LanguageTranslator;
+    TextToSpeech textToSpeech;
     Map<String, Integer> map = new HashMap<>();
+
 
 
     @Override
@@ -40,8 +45,20 @@ public class MainActivity extends AppCompatActivity {
         enter_text = findViewById(R.id.editText);
         view_for_tanslatedtext = findViewById(R.id.textView);
         scan_text = findViewById(R.id.button2);
+        speak =findViewById(R.id.button4);
        // fetch = findViewById(R.id.button3);
         String text = enter_text.getText().toString();
+
+        textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
+
+
 
 
         map.put("AF", 0);
@@ -127,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        speak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+          speak();
+            }
+        });
+
     }
 
 
@@ -226,5 +251,22 @@ public class MainActivity extends AppCompatActivity {
                             });
         }
 
+        private void speak()
+        {
+            String text = enter_text.getText().toString();
+            //Toast.makeText(getApplicationContext(), text,Toast.LENGTH_SHORT).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                textToSpeech.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+            } else {
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        }
+        public void onPause(){
+            if(textToSpeech !=null){
+                textToSpeech.stop();
+                textToSpeech.shutdown();
+            }
+            super.onPause();
+    }
 
 }
