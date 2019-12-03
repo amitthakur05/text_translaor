@@ -11,8 +11,11 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +30,12 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOption
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    Spinner spinner;
     Button translate,scan_text,speak,pronounce;
     EditText enter_text;
     TextView view_for_tanslatedtext;
@@ -39,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     TextToSpeech textToSpeech;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     Map<String, Integer> map = new HashMap<>();
+    List<String> items=new ArrayList<>();
+    int pos =0;
+    int position=0;
+    int p=0;
 
 
 
@@ -53,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         speak =findViewById(R.id.button4);
         pronounce=findViewById(R.id.button5);
        // fetch = findViewById(R.id.button3);
+
+        spinner=findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
         String text = enter_text.getText().toString();
 
 //        getActionBar().hide();
@@ -65,7 +77,66 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+      /*  items.add("Afrikaans");
+        items.add("Arabic");
+        items.add( "Belorussian");
+        items.add( "Bengali");
+        items.add( "Bulgarian");
+        items.add( "Catalan");
+        items.add( "Czech");
+        items.add( "Danish");
+       // items.add( "Dutch");
+        items.add( "English");
+        items.add( "Estonian");
+        items.add( "Filipino");
+        items.add( "Finnish");
+        items.add( "French");
+        items.add( "German");
+        items.add( "Greek");
+        items.add( "Gujarati");
+        items.add( "Hebrew");
+        items.add( "Hindi");
+        items.add( "Hungarian");
+        items.add( "Icelandic");
+        items.add( "Indonesian");
+        items.add( "Italian");
+        items.add( "Japanese");
+        items.add( "Kannada");
+        items.add( "Khmer");
+        items.add( "Korean");
+        items.add( "Lao");
+        items.add( "Latvian");
+        items.add( "Lithuanian");
+        items.add( "Macedonian");
+        items.add( "Malay");
+        items.add( "Malayalam");
+        items.add( "Marathi");
+        items.add( "Nepali");
+        items.add( "Norwegian");
+        items.add( "Persian");
+        items.add( "Polish");
+        items.add( "Portuguese");
+        items.add( "Punjabi");
+        items.add( "Romanian");
+        items.add( "Russian");
+        items.add( "Russian");
+        items.add( "Serbian");
+        items.add( "Serbian");
+        items.add( "Slovak");
+        items.add("Slovenian");
+        items.add( "Swedish");
+        items.add( "Tamil");
+        items.add( "Telugu");
+        items.add( "Thai");
+        items.add("Turkish");
+        items.add( "Ukrainian");
+        items.add( "urdu");
+        items.add( "Vietnamese");
+        items.add( "Chinese");
 
+       */
+        ArrayAdapter<String> dataAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,items);
+    spinner.setAdapter(dataAdapter);
 
 
         map.put("AF", 0);
@@ -170,6 +241,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(MainActivity.this, position+"  "+String.format("%s", items.get(position)),Toast.LENGTH_SHORT).show();
+        pos=position;
+        //return p;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
     private void identifyLanguage()
         {
             FirebaseLanguageIdentification languageIdentifier =
@@ -182,7 +266,10 @@ public class MainActivity extends AppCompatActivity {
                                     if (languageCode != "und") {
                                         // Log.i(TAG, "Language: " + languageCode);
                                         lan = languageCode.toUpperCase();
+                                       // pos=Posit();
+                                       // Toast.makeText(MainActivity.this,""+pos,Toast.LENGTH_SHORT).show();
                                         translate(lan);
+                                        //Toast.makeText(MainActivity.this,""+pos,Toast.LENGTH_SHORT).show();
                                         Toast.makeText(MainActivity.this, "language code is  "+lan, Toast.LENGTH_SHORT).show();
 
                                     } else {
@@ -207,11 +294,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void translate(String lan_code) {
-
+          // int a= posit();
+            //
+            // Toast.makeText(MainActivity.this,pos,Toast.LENGTH_SHORT).show();
           try {
+
+             //
+           //   Toast.makeText(MainActivity.this,position,Toast.LENGTH_SHORT).show();
               FirebaseTranslatorOptions options =
                       new FirebaseTranslatorOptions.Builder()
-                              .setSourceLanguage(map.get(lan))
+                              .setSourceLanguage(pos)
                               .setTargetLanguage(FirebaseTranslateLanguage.HI)
                               .build();
 
@@ -313,6 +405,9 @@ public class MainActivity extends AppCompatActivity {
             textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
     }
+
+
+
 
 
 }
