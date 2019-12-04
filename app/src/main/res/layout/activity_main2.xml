@@ -31,7 +31,7 @@
             android:gravity="center" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button5"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"

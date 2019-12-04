@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
-    Button translate,scan_text,speak,pronounce;
+    Button translate,scan_text;
+    ImageButton speak,pronounce;
     EditText enter_text;
     TextView view_for_tanslatedtext;
     String lan="";
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private final int REQ_CODE_SPEECH_INPUT = 100;
     Map<String, Integer> map = new HashMap<>();
     List<String> items=new ArrayList<>();
+    List<String> k_lang=new ArrayList<>();
     int pos =0;
     int position=0;
     int p=0;
@@ -77,64 +80,65 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-      /*  items.add("Afrikaans");
+        items.add("Afrikaans");
         items.add("Arabic");
         items.add( "Belorussian");
-        items.add( "Bengali");
         items.add( "Bulgarian");
+        items.add( "Bengali");
         items.add( "Catalan");
         items.add( "Czech");
+        items.add("Welsh");
         items.add( "Danish");
-       // items.add( "Dutch");
-        items.add( "English");
-        items.add( "Estonian");
-        items.add( "Filipino");
-        items.add( "Finnish");
-        items.add( "French");
         items.add( "German");
         items.add( "Greek");
+        items.add( "English");
+        items.add( "Esperanto");
+        items.add( "Spanish");
+        items.add("Estonian");
+        items.add( "Persian");
+        items.add( "Finnish");
+        items.add( "French");
+        items.add("Irish");
+        items.add("Galician");
         items.add( "Gujarati");
         items.add( "Hebrew");
         items.add( "Hindi");
+        items.add("Croatian");
+        items.add("Haitian");
         items.add( "Hungarian");
-        items.add( "Icelandic");
         items.add( "Indonesian");
+        items.add( "Icelandic");
         items.add( "Italian");
         items.add( "Japanese");
+        items.add("Georgian");
         items.add( "Kannada");
-        items.add( "Khmer");
         items.add( "Korean");
-        items.add( "Lao");
-        items.add( "Latvian");
         items.add( "Lithuanian");
+        items.add( "Latvian");
         items.add( "Macedonian");
-        items.add( "Malay");
-        items.add( "Malayalam");
         items.add( "Marathi");
-        items.add( "Nepali");
+        items.add( "Malay");
+        items.add("Maltese");
+        items.add("Dutch");
         items.add( "Norwegian");
-        items.add( "Persian");
         items.add( "Polish");
         items.add( "Portuguese");
-        items.add( "Punjabi");
         items.add( "Romanian");
         items.add( "Russian");
-        items.add( "Russian");
-        items.add( "Serbian");
-        items.add( "Serbian");
         items.add( "Slovak");
         items.add("Slovenian");
+        items.add( "Albanian");
         items.add( "Swedish");
+        items.add("Swahili");
         items.add( "Tamil");
         items.add( "Telugu");
         items.add( "Thai");
+        items.add("Taglog");
         items.add("Turkish");
         items.add( "Ukrainian");
-        items.add( "urdu");
+        items.add("Urdu");
         items.add( "Vietnamese");
         items.add( "Chinese");
-
-       */
         ArrayAdapter<String> dataAdapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,items);
     spinner.setAdapter(dataAdapter);
 
@@ -303,8 +307,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            //   Toast.makeText(MainActivity.this,position,Toast.LENGTH_SHORT).show();
               FirebaseTranslatorOptions options =
                       new FirebaseTranslatorOptions.Builder()
-                              .setSourceLanguage(pos)
-                              .setTargetLanguage(FirebaseTranslateLanguage.HI)
+                              .setSourceLanguage(map.get(lan))
+                              .setTargetLanguage(pos)
                               .build();
 
               LanguageTranslator =

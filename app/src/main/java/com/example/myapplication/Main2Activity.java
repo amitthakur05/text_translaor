@@ -37,7 +37,7 @@ private static final int requestPermissionID=101;
        // fetch=findViewById(R.id.button2);
         surfaceView=findViewById(R.id.surfaceView);
         mtextview=findViewById(R.id.textView2);
-        okay=findViewById(R.id.button3);
+        okay=findViewById(R.id.button5);
         fetchtext();
 
         okay.setOnClickListener(new View.OnClickListener() {
