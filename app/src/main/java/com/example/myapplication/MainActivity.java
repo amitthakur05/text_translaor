@@ -3,12 +3,14 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,20 +41,25 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
-    Button translate,scan_text;
-    ImageButton speak,pronounce;
+  //  Button translate;
+    ImageButton speak,pronounce,scan_text,translate;
     EditText enter_text;
     TextView view_for_tanslatedtext;
     String lan="";
+    //private TableLayout tableLayout;
+    private LinearLayout linearLayout;
     FirebaseTranslator LanguageTranslator;
     TextToSpeech textToSpeech;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     Map<String, Integer> map = new HashMap<>();
     List<String> items=new ArrayList<>();
-    List<String> k_lang=new ArrayList<>();
+   // List<String> k_lang=new ArrayList<>();
     int pos =0;
     int position=0;
+    private EditText editText;
     int p=0;
+   // private CardView cardView;
+   // boolean visible=true;
 
 
 
@@ -64,11 +73,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         scan_text = findViewById(R.id.button2);
         speak =findViewById(R.id.button4);
         pronounce=findViewById(R.id.button5);
+      //  cardView=findViewById(R.id.card2);
+
        // fetch = findViewById(R.id.button3);
 
         spinner=findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         String text = enter_text.getText().toString();
+      //  tableLayout=findViewById(R.id.table1);
+
 
 //        getActionBar().hide();
         textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -242,12 +255,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
+
+
+
+
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(MainActivity.this, position+"  "+String.format("%s", items.get(position)),Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(MainActivity.this, position+"  "+String.format("%s", items.get(position)),Toast.LENGTH_SHORT).show();
         pos=position;
         //return p;
     }
@@ -349,6 +367,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 public void onSuccess(@NonNull String translatedText) {
                                     view_for_tanslatedtext.setText(translatedText);
                                     view_for_tanslatedtext.setTextSize(16);
+                                    view_for_tanslatedtext.setMovementMethod(new ScrollingMovementMethod());
 
                                 }
                             })
@@ -391,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     enter_text.setText(result.get(0));
+
                 }
                 break;
             }

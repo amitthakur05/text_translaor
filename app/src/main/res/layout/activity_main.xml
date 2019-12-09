@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCFCFF"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -21,10 +20,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="72dp">
 
             <TableLayout
+                android:id="@+id/table1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -75,6 +76,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="122dp"
             android:layout_marginTop="1dp">
@@ -97,16 +99,18 @@
             android:layout_height="84dp">
 
             <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/button4"
                     android:layout_width="58dp"
-                    android:layout_height="58dp"
+                    android:layout_height="57dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/white"
                     app:srcCompat="@mipmap/mic" />
 
                 <ImageButton
@@ -114,40 +118,77 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    app:srcCompat="@mipmap/spk" />
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/white"
+                    app:srcCompat="@mipmap/speak" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/button"
-                    android:layout_width="54dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="61dp"
+                    android:layout_height="52dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="TR" />
+                    android:background="@android:color/white"
+                    app:srcCompat="@mipmap/trnls" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/button2"
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="110dp"
-                    android:text="Sc"
-                    android:textColorLink="#009B9797" />
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/capture" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="60dp"
+                android:text="mic"
+                android:textAlignment="textStart"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="60dp"
+                android:text="speaker"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="60dp"
+                android:text="Translate"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="258dp"
+                android:layout_marginTop="60dp"
+                android:text="Capture"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="304dp"
+            android:layout_width="350dp"
+            android:layout_height="364dp"
             android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="360dp"
-                android:layout_height="match_parent" />
+                android:layout_width="350dp"
+                android:layout_height="364dp" />
+
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
