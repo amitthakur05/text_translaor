@@ -33,11 +33,15 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguag
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import static java.util.Locale.getAvailableLocales;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     int position=0;
     private EditText editText;
     int p=0;
+    private String s;
    // private CardView cardView;
    // boolean visible=true;
 
@@ -88,11 +93,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    textToSpeech.setLanguage(Locale.ENGLISH);
+                  // s= Arrays.toString(getAvailableLocales());
+                    textToSpeech.setLanguage(Locale.forLanguageTag("hin"));
                 }
             }
         });
-
+      //  Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show();
         items.add("Afrikaans");
         items.add("Arabic");
         items.add( "Belorussian");
@@ -366,6 +372,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 @Override
                                 public void onSuccess(@NonNull String translatedText) {
                                     view_for_tanslatedtext.setText(translatedText);
+                                     s=translatedText;
                                     view_for_tanslatedtext.setTextSize(16);
                                     view_for_tanslatedtext.setMovementMethod(new ScrollingMovementMethod());
 
@@ -421,12 +428,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void speak()
     {
-        String text = enter_text.getText().toString();
+        //String text = enter_text.getText().toString();
         //Toast.makeText(getApplicationContext(), text,Toast.LENGTH_SHORT).show();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            textToSpeech.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+            textToSpeech.speak(s,TextToSpeech.QUEUE_FLUSH,null,null);
         } else {
-            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            textToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 
