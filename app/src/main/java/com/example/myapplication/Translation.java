@@ -3,7 +3,6 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -11,16 +10,13 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,21 +25,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage;
 import com.google.firebase.ml.naturallanguage.languageid.FirebaseLanguageIdentification;
-import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static java.util.Locale.getAvailableLocales;
-
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Translation extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
   //  Button translate;
     ImageButton speak,pronounce,scan_text,translate;
@@ -98,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
-      //  Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(Translation.this,s,Toast.LENGTH_SHORT).show();
         items.add("Afrikaans");
         items.add("Arabic");
         items.add( "Belorussian");
@@ -241,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         scan_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                Intent i = new Intent(Translation.this, Capture_image.class);
                 startActivity(i);
             }
         });
@@ -271,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-      //  Toast.makeText(MainActivity.this, position+"  "+String.format("%s", items.get(position)),Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(Translation.this, position+"  "+String.format("%s", items.get(position)),Toast.LENGTH_SHORT).show();
         pos=position;
         //return p;
     }
@@ -295,13 +286,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                         // Log.i(TAG, "Language: " + languageCode);
                                         lan = languageCode.toUpperCase();
                                        // pos=Posit();
-                                       // Toast.makeText(MainActivity.this,""+pos,Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(Translation.this,""+pos,Toast.LENGTH_SHORT).show();
                                         translate(lan);
-                                        //Toast.makeText(MainActivity.this,""+pos,Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(MainActivity.this, "language code is  "+lan, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(Translation.this,""+pos,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Translation.this, "language code is  "+lan, Toast.LENGTH_SHORT).show();
 
                                     } else {
-                                        Toast.makeText(MainActivity.this, "Language is undetermined !!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Translation.this, "Language is undetermined !!", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
@@ -313,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                  //   lan="EN";
                                     // Model couldn’t be loaded or other internal error.
                                     // ...
-                                  //  Toast.makeText(MainActivity.this, "Failed to recognize text in image!!", Toast.LENGTH_LONG).show();
+                                  //  Toast.makeText(Translation.this, "Failed to recognize text in image!!", Toast.LENGTH_LONG).show();
                                 }
                             });
 
@@ -324,11 +315,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         private void translate(String lan_code) {
           // int a= posit();
             //
-            // Toast.makeText(MainActivity.this,pos,Toast.LENGTH_SHORT).show();
+            // Toast.makeText(Translation.this,pos,Toast.LENGTH_SHORT).show();
           try {
 
              //
-           //   Toast.makeText(MainActivity.this,position,Toast.LENGTH_SHORT).show();
+           //   Toast.makeText(Translation.this,position,Toast.LENGTH_SHORT).show();
               FirebaseTranslatorOptions options =
                       new FirebaseTranslatorOptions.Builder()
                               .setSourceLanguage(map.get(lan))
@@ -345,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                               new OnSuccessListener<Void>() {
                                   @Override
                                   public void onSuccess(Void v) {
-                                      Toast.makeText(MainActivity.this, "Successfully Translated !!", Toast.LENGTH_SHORT).show();
+                                      Toast.makeText(Translation.this, "Successfully Translated !!", Toast.LENGTH_SHORT).show();
 
                                       setlanguage();
                                   }
@@ -360,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
           }
           catch (Exception e)
           {
-              Toast.makeText(MainActivity.this, "Translation not available", Toast.LENGTH_SHORT).show();
+              Toast.makeText(Translation.this, "Translation not available", Toast.LENGTH_SHORT).show();
           }
 
         }
@@ -382,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(MainActivity.this, "can't determine Language!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Translation.this, "can't determine Language!!", Toast.LENGTH_SHORT).show();
 
                                 }
                             });

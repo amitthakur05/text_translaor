@@ -19,14 +19,14 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
-public class Main2Activity extends AppCompatActivity {
+public class Capture_image extends AppCompatActivity {
 SurfaceView surfaceView;
 CameraSource cameraSource;
 TextView mtextview;
 Button okay;
 TextRecognizer textRecognizer;
 
-private static final String TAG="MainActivity";
+private static final String TAG="Translation";
 private static final int requestPermissionID=101;
 
 
@@ -61,7 +61,7 @@ private static final int requestPermissionID=101;
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED)
         {
             try {
-                if(ActivityCompat.checkSelfPermission(Main2Activity.this, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)
+                if(ActivityCompat.checkSelfPermission(Capture_image.this, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)
                 {
                     return;
                 }
@@ -94,7 +94,7 @@ private static final int requestPermissionID=101;
         }
         else
         {
-            cameraSource=new CameraSource.Builder(Main2Activity.this,textRecognizer)
+            cameraSource=new CameraSource.Builder(Capture_image.this,textRecognizer)
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
                     .setRequestedPreviewSize(1280,1024)
                     .setAutoFocusEnabled(true).setRequestedFps(2.0f).build();
@@ -105,7 +105,7 @@ private static final int requestPermissionID=101;
                     try {
                         if(ActivityCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)
                         {
-                            ActivityCompat.requestPermissions(Main2Activity.this,new String[]{Manifest.permission.CAMERA},requestPermissionID);
+                            ActivityCompat.requestPermissions(Capture_image.this,new String[]{Manifest.permission.CAMERA},requestPermissionID);
                             return;
                         }
                         cameraSource.start(surfaceView.getHolder());
@@ -156,7 +156,7 @@ private static final int requestPermissionID=101;
                                 stringBuilder.append("\n");
                             }
                             String text=stringBuilder.toString();
-                            Intent i=new Intent(Main2Activity.this,MainActivity.class);
+                            Intent i=new Intent(Capture_image.this, Translation.class);
                             i.putExtra("message",text);
                             startActivity(i);
                             // mtextview.setText(stringBuilder.toString());
